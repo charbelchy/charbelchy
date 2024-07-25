@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Calculator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            /* background-color: rgb(19, 19, 40); */
+        }
+        body {
+            background-image: url('charbelweb1.png'); 
+            background-size: cover; 
+            background-repeat: no-repeat; 
+            background-position: center; 
+            /* background-color: rgb(19, 19, 40);  */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            height: 100vh;
+            color: white;
+            padding: 10px; 
+        }
+        .calculator {
+            border: 2px solid #000;
+            width: 520px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .calculator input {
+            width: 100%;
+            height: 40px;
+            margin-bottom: 10px;
+            font-size: 18px;
+            text-align: right;
+            padding: 5px;
+        }
+        .calculator button {
+            width: 45%;
+            height: 50px;
+            margin: 5px 2%;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+        }
+        #btn1, #btn2, #btn3, #btn4, #btn5, #btn6, #btn7, #btn8, #btn9, #btn0 {
+            background-color: #4CAF50;
+        }
+        #btnAdd, #btnSubtract, #btnMultiply, #btnDivide {
+            background-color: #FF9800;
+        }
+        #btnEqual {
+            background-color: #2196F3;
+        }
+        #btnClear {
+            background-color: #F44336;
+        }
+        #btnEqual {
+            width: 96%;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function calculate() {
+            const display = document.getElementById('display');
+            const error = document.getElementById('error');
+            try {
+                if (display.value.includes('/0')) {
+                    throw new Error('Division by zero is not allowed');
+                }
+                display.value = eval(display.value);
+                error.textContent = '';
+            } catch (e) {
+                error.textContent = e.message;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="calculator">
+        <form name="calc">
+            <input type="text" id="display" name="display" readonly>
+            <br>
+            <button type="button" id="btn1" onclick="calc.display.value += '1'">1</button>
+            <button type="button" id="btn2" onclick="calc.display.value += '2'">2</button>
+            <button type="button" id="btn3" onclick="calc.display.value += '3'">3</button>
+            <button type="button" id="btnClear" onclick="calc.display.value = ''">C</button>
+            <br>
+            <button type="button" id="btn4" onclick="calc.display.value += '4'">4</button>
+            <button type="button" id="btn5" onclick="calc.display.value += '5'">5</button>
+            <button type="button" id="btn6" onclick="calc.display.value += '6'">6</button>
+            <button type="button" id="btnAdd" onclick="calc.display.value += '+'">+</button>
+            <br>
+            <button type="button" id="btn7" onclick="calc.display.value += '7'">7</button>
+            <button type="button" id="btn8" onclick="calc.display.value += '8'">8</button>
+            <button type="button" id="btn9" onclick="calc.display.value += '9'">9</button>
+            <button type="button" id="btnSubtract" onclick="calc.display.value += '-'">-</button>
+            <br>
+            <button type="button" id="btn0" onclick="calc.display.value += '0'">0</button>
+            <button type="button" id="btnMultiply" onclick="calc.display.value += '*'">X</button>
+            <button type="button" id="btnDivide" onclick="calc.display.value += '/'">÷</button>
+            <button type="button" id="btnEqual" onclick="calculate()">=</button>
+        </form>
+        <div id="error" class="error"></div>
+    </div>
+</body>
+</html>

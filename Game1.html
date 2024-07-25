@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style></style>
+  <style>
+  body {
+            background-image: url('charbelweb1.png'); 
+            background-size: cover; 
+            background-repeat: no-repeat; 
+            background-position: center; 
+            background-color: rgb(19, 19, 40); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            height: 100vh;
+            color: white;
+            padding: 10px; 
+        }
+  .audio-player {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgb(19, 19, 40);
+        padding: 10px;
+        border-top: 1px solid #ff020200;
+        text-align: center;
+        color: #c10e0e00;
+        border-color: #e30a0a24;
+    }
+
+    
+    .audio-player audio {
+        width: 100%;
+        background-color: #f9f9f900;
+    }
+
+ 
+    .audio-player audio::-webkit-media-controls-play-button, 
+    
+    .audio-player audio::-webkit-media-controls-pause-button,
+    .audio-player audio::-webkit-media-controls-play-button:before,
+    .audio-player audio::-webkit-media-controls-pause-button:before {
+        color: #333;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: rgb(19, 19, 40);
+    }
+
+    .code-input {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+   #user, .code-input input {
+        width: 75px;
+        height: 75px;
+        font-size: 24px;
+        text-align: center;
+        margin: 0 5px;
+    }
+
+    .input1, .submit-button {
+        display: inline-block;
+        background-color: #CCCCCC;
+        color: #333333;
+        padding: 20px 40px;
+        font-size: 24px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        border-radius: 10px;
+        transition: background-color 0.3s;
+        text-decoration: none;
+        outline: none;
+        margin-top: 100px;
+    }
+
+    .input1,.submit-button:hover {
+        background-color: #AAAAAA;
+    }
+
+    .input1, .submit-button:active {
+        background-color: #888888;
+    }
+
+    p{ 
+        font-family: 'Arial', sans-serif;
+        font-size: 28px;
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+        
+        border-radius: 10px;
+        
+        margin-bottom: 10px;
+    }
+    .input1, input{
+        border-radius: 10px;
+    }
+    
+</style>
+
+</head>
+<body>
+    <button onclick="refreshPage()" class="input1" >Play Again</button> <bt></bt>
+    <bt></bt>
+    <bt></bt>
+    <div id="timer">00:00:00</div>
+ 
+  <div id="code-input" class="code-input"></div>
+  <div id="photoGallery"> 
+
+    <img src="" alt="">
+  </div>
+
+<br><br>
+<input type="text" name="" id="user" maxlength="1"  >
+<p class="result-text" id="resultText" ></p>
+    <button class="submit-button" id="btt" onclick="Submit()">Enter Code</button>
+
+
+
+<script >
+    var lst = ['kifak', 'pizza', 'banadoura', 'bandora', "kfc", 'mcdo', 'bk', 'cheeseOnTop', 'telephone','appel','i'];
+var letters=[]
+var b = Math.floor(Math.random() * lst.length);
+var mainbox = document.getElementById("code-input");
+var word = lst[b];
+var chance=6;
+var win=0;
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var button = document.getElementById('btt');
+
+   
+    function handleKeyPress(event) {
+        if (event.keyCode === 13) {
+            button.click(); 
+        }
+    }
+
+   
+    document.addEventListener('keypress', handleKeyPress);
+});
+
+
+
+
+function Submit(){var user=document.getElementById("user");
+if(letters.includes(user.value)){
+    console.log(letters);
+
+    return 
+}    
+
+letters.push(user.value);
+let correct_answer=false;
+
+for(let i=0;i<word.length;i++){
+
+if (user.value==word[i]){
+    win++
+    console.log("correct")
+    const inputf=document.getElementById('input' +( i+1));
+    inputf.value=user.value;
+    correct_answer=true;
+}
+else{
+    console.log("incorrect")}
+    
+}
+if(correct_answer==false){
+    chance--
+    document.getElementById.src
+console.log(chance)
+
+
+}
+document.getElementById("user").value = "";
+if(chance==0){
+    user.disabled=true;
+    user.value="you lost"
+    document.getElementById('btt').disabled=true;
+    user.style.width="100px";
+}
+if(win==word.length){
+    user.value="you won"
+    stopTimer()
+    user.style.width="100px";
+   
+}
+}
+
+function refreshPage() {
+    window.location.reload();
+}
+
+
+
+
+function mergeInputs() {
+    
+    var mergedValue = '';
+    for (var i = 1; i <= word.length; i++) {
+        var input = document.getElementById('input' + i);
+     } 
+}
+
+for (var i = 1; i <= word.length; i++) {
+    const newinput = document.createElement('input');
+    newinput.type = 'text';
+    newinput.id = 'input' + i;
+    newinput.maxLength = '1';
+    newinput.onchange = mergeInputs;
+    newinput.disabled=true;
+    newinput.oninput = (function(index) {
+        return function() {
+            moveToNextInput(index);
+        };
+    })(i);
+
+    mainbox.appendChild(newinput);
+}    
+
+console.log(word);
+
+</script>
+<script >
+    let timerInterval;
+let startTime;
+let elapsedTime = 0;
+
+function startTimer() {
+    startTime = Date.now() - elapsedTime;
+    timerInterval = setInterval(updateTimer, 1000);
+}
+startTimer()
+function updateTimer() {
+    const currentTime = Date.now();
+    elapsedTime = currentTime - startTime;
+    displayTime(elapsedTime);
+}
+
+function displayTime(milliseconds) {
+    const hours = Math.floor(milliseconds / (1000 * 60 * 60));
+    const minutes = Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((milliseconds % (1000 * 60)) / 1000);
+    const formattedTime = pad(hours) + ":" + pad(minutes) + ":" + pad(seconds);
+    document.getElementById("timer").textContent = formattedTime;
+}
+
+function pad(number) {
+    return (number < 10 ? "0" : "") + number;
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+}
+
+function resetTimer() {
+    clearInterval(timerInterval);
+    elapsedTime = 0;
+    displayTime(elapsedTime);
+}
+
+
+
+
+
+</script>
+
+
+</body>
+</html>
+
